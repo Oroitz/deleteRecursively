@@ -22,13 +22,13 @@ def del_file(directory, filename):
 		# If the element is a subdirectory the delete function is loaded with that directory
 		
 		if  os.path.isdir(directory + slash +  file):
-			del_file(directory + slash + file)
+			del_file(directory + slash + file, filename)
 		
 		# If the element is the searched file it will be deleted
 		
 		elif file == filename:
-			print('Deleting ' + directory + filename)
-			os.remove(directory + filename)
+			print('Deleting ' + directory + slash + filename)
+			os.remove(directory + slash + filename)
 
 # Function to define the file and the root directory to delete recursively
 
@@ -52,17 +52,17 @@ def remove_file_recursively():
 	
 	# Check if the directory exists and it is not a file
 	
-	if os.path.isdir(root_dir):
+	if not os.path.isdir(root_dir):
 		if os.path.isfile(root_dir):
 			print("Error: the given directory is a file")
 			exit()
 		else:
 			print("Error: the directory does not exist")
 	
-	# If the root directory has no slash it is added
+	# If the root directory has slash it is removed
 	
-	if root_dir[len(root_dir)-1] != slash:
-		directory = root_dir + slash
+	if root_dir[len(root_dir)-1] == slash:
+		directory = root_dir[len(root_dir)-1]
 	else:
 		directory = root_dir
 	
